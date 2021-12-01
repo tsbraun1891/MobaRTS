@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Entities/Entity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Entities/Actors/Actor.gd" type="Script" id=2]
+[ext_resource path="res://Entities/Attacker.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CylinderMesh" id=1]
+top_radius = 0.5
+bottom_radius = 0.5
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Attack"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ), Vector3( 1.5, 1.25, 1.5 ), Vector3( 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 1, 1, 1 ) ]
+}
+
+[node name="Actor" instance=ExtResource( 1 )]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 2 )
+healthbarHeight = 2.5
+
+[node name="CollisionShape" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+
+[node name="MeshInstance" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="FaceMesh" type="MeshInstance" parent="." index="2"]
+transform = Transform( 0.4, 0, 0, 0, 0.24, 0, 0, 0, 0.4, 0, 1.46614, -0.213907 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Attacker" parent="." index="4" instance=ExtResource( 3 )]
+
+[node name="PathTimer" type="Timer" parent="." index="6"]
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+anims/Attack = SubResource( 3 )
+anims/RESET = SubResource( 4 )

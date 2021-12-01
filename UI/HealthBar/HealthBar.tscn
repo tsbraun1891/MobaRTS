@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/HealthBar/HealthBar2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Healthbar/barHorizontal_red.png" type="Texture" id=2]
+[ext_resource path="res://UI/HealthBar/HealthBar.gd" type="Script" id=3]
+
+[node name="HealthBar" type="Sprite3D"]
+cast_shadow = 0
+billboard = 1
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 200, 26 )
+transparent_bg = true
+usage = 0
+
+[node name="HealthBar2D" parent="Viewport" instance=ExtResource( 1 )]
