@@ -1,13 +1,15 @@
-# Plugin Specific ignores
-default_env.tres
-icon.png
-icon.png.import
-scn/
-override.cfg
-
-# Godot-specific ignores
+# Import cache
 .import/
 
-# Mono-specific ignores
-.mono/
-data_*/
+# Binaries
+# bin/
+build/
+lib/
+
+.mono
+Exports
+*.un~
+*~
+
+# VSCode
+.vscode
